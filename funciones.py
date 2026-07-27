@@ -155,7 +155,6 @@ def crear_cuenta():
     print(f"Número de cuenta: {numero_cuenta}")
     print(f"Tipo de cuenta: {tipo_cuenta}")
 
-
 def menu_principal():
 
     saldo = 100000
