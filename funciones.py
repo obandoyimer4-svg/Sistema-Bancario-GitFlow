@@ -1,4 +1,45 @@
+import json
 import os
+
+
+def registrar_cliente():
+
+    print("\n===== REGISTRO DE CLIENTE =====")
+
+    nombre = input("Ingrese el nombre: ")
+    documento = input("Ingrese el documento: ")
+    telefono = input("Ingrese el teléfono: ")
+
+    cliente = {
+        "nombre": nombre,
+        "documento": documento,
+        "telefono": telefono
+    }
+
+    ruta = "data/usuarios.json"
+
+    if os.path.exists(ruta):
+
+        with open(ruta, "r", encoding="utf-8") as archivo:
+
+            try:
+                clientes = json.load(archivo)
+            except:
+                clientes = []
+
+    else:
+
+        clientes = []
+
+    clientes.append(cliente)
+
+    with open(ruta, "w", encoding="utf-8") as archivo:
+
+        json.dump(clientes, archivo, indent=4, ensure_ascii=False)
+
+    print("\nCliente registrado correctamente.")
+    print("Los datos fueron guardados en usuarios.json")
+
 
 def menu_principal():
 
@@ -21,7 +62,7 @@ def menu_principal():
 
         if opcion == "1":
 
-            print("\nFunción Registrar Cliente en desarrollo.")
+            registrar_cliente()
 
         elif opcion == "2":
 
