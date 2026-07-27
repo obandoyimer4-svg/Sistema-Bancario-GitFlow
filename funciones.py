@@ -56,7 +56,8 @@ def menu_principal():
         print("4. Consultar saldo")
         print("5. Consignar dinero")
         print("6. Transferencias")
-        print("7. Salir")
+        print("7. Retirar dinero")
+        print("8. Salir")
 
         opcion = input("\nSeleccione una opción: ")
 
@@ -113,6 +114,25 @@ def menu_principal():
                 print("\nEl valor debe ser mayor que cero.")
 
         elif opcion == "7":
+
+            valor = float(input("\nIngrese el valor a retirar: "))
+
+            if valor > 0 and valor <= saldo:
+
+                saldo -= valor
+
+                print("\nRetiro realizado correctamente.")
+                print(f"Saldo restante: ${saldo}")
+
+            elif valor > saldo:
+
+                print("\nSaldo insuficiente para realizar el retiro.")
+
+            else:
+
+                print("\nEl valor debe ser mayor que cero.")
+
+        elif opcion == "8":
 
             print("\nGracias por utilizar el sistema.")
             break
