@@ -13,8 +13,9 @@ def menu_principal():
         print("2. Iniciar sesión")
         print("3. Crear cuenta bancaria")
         print("4. Consultar saldo")
-        print("5. Transferencias")
-        print("6. Salir")
+        print("5. Consignar dinero")
+        print("6. Transferencias")
+        print("7. Salir")
 
         opcion = input("\nSeleccione una opción: ")
 
@@ -36,10 +37,25 @@ def menu_principal():
 
         elif opcion == "5":
 
-            cuenta = input("Ingrese el número de cuenta destino: ")
+            valor = float(input("\nIngrese el valor a consignar: "))
+
+            if valor > 0:
+
+                saldo += valor
+
+                print("\nConsignación realizada correctamente.")
+                print(f"Nuevo saldo: ${saldo}")
+
+            else:
+
+                print("\nEl valor debe ser mayor que cero.")
+
+        elif opcion == "6":
+
+            cuenta = input("\nIngrese el número de cuenta destino: ")
             valor = float(input("Ingrese el valor a transferir: "))
 
-            if valor <= saldo:
+            if valor > 0 and valor <= saldo:
 
                 saldo -= valor
 
@@ -47,11 +63,15 @@ def menu_principal():
                 print(f"Cuenta destino: {cuenta}")
                 print(f"Saldo restante: ${saldo}")
 
-            else:
+            elif valor > saldo:
 
                 print("\nSaldo insuficiente.")
 
-        elif opcion == "6":
+            else:
+
+                print("\nEl valor debe ser mayor que cero.")
+
+        elif opcion == "7":
 
             print("\nGracias por utilizar el sistema.")
             break
