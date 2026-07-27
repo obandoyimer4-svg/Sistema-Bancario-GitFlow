@@ -1,0 +1,16 @@
+[
+    {
+        "numero_cuenta": 1001,
+        "documento": "1072657710",
+        "titular": "samuel",
+        "tipo_cuenta": "Ahorros",
+        "saldo": 0
+    },
+    {
+        "numero_cuenta": 1002,
+        "documento": "1120570285",
+        "titular": "hoover bernal",
+        "tipo_cuenta": "Corriente",
+        "saldo": 0
+    }
+]

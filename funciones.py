@@ -71,6 +71,91 @@ def iniciar_sesion():
     print("\nCliente no encontrado.")
 
 
+def crear_cuenta():
+
+    print("\n===== CREAR CUENTA BANCARIA =====")
+
+    documento = input("Ingrese el documento del cliente: ")
+
+    ruta_clientes = "data/usuarios.json"
+
+    with open(ruta_clientes, "r", encoding="utf-8") as archivo:
+
+        try:
+            clientes = json.load(archivo)
+        except:
+            clientes = []
+
+    cliente_encontrado = None
+
+    for cliente in clientes:
+
+        if cliente["documento"] == documento:
+
+            cliente_encontrado = cliente
+            break
+
+    if cliente_encontrado is None:
+
+        print("\nCliente no encontrado.")
+        return
+
+    print("\nSeleccione el tipo de cuenta:")
+    print("1. Cuenta de Ahorros")
+    print("2. Cuenta Corriente")
+
+    opcion = input("Opción: ")
+
+    if opcion == "1":
+
+        tipo_cuenta = "Ahorros"
+
+    elif opcion == "2":
+
+        tipo_cuenta = "Corriente"
+
+    else:
+
+        print("\nOpción inválida.")
+        return
+
+    ruta_cuentas = "data/cuentas.json"
+
+    if os.path.exists(ruta_cuentas):
+
+        with open(ruta_cuentas, "r", encoding="utf-8") as archivo:
+
+            try:
+                cuentas = json.load(archivo)
+            except:
+                cuentas = []
+
+    else:
+
+        cuentas = []
+
+    numero_cuenta = 1001 + len(cuentas)
+
+    nueva_cuenta = {
+        "numero_cuenta": numero_cuenta,
+        "documento": documento,
+        "titular": cliente_encontrado["nombre"],
+        "tipo_cuenta": tipo_cuenta,
+        "saldo": 0
+    }
+
+    cuentas.append(nueva_cuenta)
+
+    with open(ruta_cuentas, "w", encoding="utf-8") as archivo:
+
+        json.dump(cuentas, archivo, indent=4, ensure_ascii=False)
+
+    print("\nCuenta creada exitosamente.")
+    print(f"Titular: {cliente_encontrado['nombre']}")
+    print(f"Número de cuenta: {numero_cuenta}")
+    print(f"Tipo de cuenta: {tipo_cuenta}")
+
+
 def menu_principal():
 
     saldo = 100000
@@ -101,7 +186,7 @@ def menu_principal():
 
         elif opcion == "3":
 
-            print("\nFunción Crear Cuenta Bancaria en desarrollo.")
+            crear_cuenta()
 
         elif opcion == "4":
 
