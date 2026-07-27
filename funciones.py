@@ -41,6 +41,36 @@ def registrar_cliente():
     print("Los datos fueron guardados en usuarios.json")
 
 
+def iniciar_sesion():
+
+    print("\n===== INICIAR SESIÓN =====")
+
+    documento = input("Ingrese su documento: ")
+
+    ruta = "data/usuarios.json"
+
+    if not os.path.exists(ruta):
+
+        print("\nNo hay clientes registrados.")
+        return
+
+    with open(ruta, "r", encoding="utf-8") as archivo:
+
+        try:
+            clientes = json.load(archivo)
+        except:
+            clientes = []
+
+    for cliente in clientes:
+
+        if cliente["documento"] == documento:
+
+            print(f"\nBienvenido(a), {cliente['nombre']}")
+            return
+
+    print("\nCliente no encontrado.")
+
+
 def menu_principal():
 
     saldo = 100000
@@ -67,7 +97,7 @@ def menu_principal():
 
         elif opcion == "2":
 
-            print("\nFunción Iniciar Sesión en desarrollo.")
+            iniciar_sesion()
 
         elif opcion == "3":
 
@@ -126,7 +156,7 @@ def menu_principal():
 
             elif valor > saldo:
 
-                print("\nSaldo insuficiente para realizar el retiro.")
+                print("\nSaldo insuficiente.")
 
             else:
 
